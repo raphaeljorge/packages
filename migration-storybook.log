@@ -1,0 +1,83 @@
+🔎 checking possible migrations..
+
+⚠️  failed to check fix mdx-to-csf
+
+Error: ❌ Unable to determine Storybook stories globs in {
+  "addons": [
+    "@storybook/addon-webpack5-compiler-babel"
+  ],
+  "docs": {
+    "autodocs": true
+  }
+}, skipping mdx-to-csf fix.
+
+In Storybook 7, we have deprecated defining stories in MDX files, and consequently have changed the suffix to simply .mdx.
+
+Now, since Storybook 8.0, we have removed support for .stories.mdx files.
+
+We were unable to automatically migrate your 'stories' config to include any .mdx file instead of just .stories.mdx.
+We suggest you make this change manually.
+To learn more about this change, see: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#mdx-docs-files
+    at Object.check (/Users/raphaeljorge/.npm/_npx/81550dc2f912c568/node_modules/@storybook/cli/dist/bin/index.cjs:351:1403)
+    at runFixes (/Users/raphaeljorge/.npm/_npx/81550dc2f912c568/node_modules/@storybook/cli/dist/bin/index.cjs:643:3115)
+    at async automigrate (/Users/raphaeljorge/.npm/_npx/81550dc2f912c568/node_modules/@storybook/cli/dist/bin/index.cjs:643:1807)
+    at async doAutomigrate (/Users/raphaeljorge/.npm/_npx/81550dc2f912c568/node_modules/@storybook/cli/dist/bin/index.cjs:643:453)
+    at async Command.<anonymous> (/Users/raphaeljorge/.npm/_npx/81550dc2f912c568/node_modules/@storybook/cli/dist/bin/index.cjs:713:2892)
+
+🔎 found a 'remove-react-dependency' migration:
+╭ Manual migration detected ───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                                              │
+│   We detected that your project has a dependency for "react" that it might not need.                                                                                         │
+│   Nothing breaks by having it, you can safely ignore this message, if you wish.                                                                                              │
+│                                                                                                                                                                              │
+│   Storybook asked you to add "react" as a direct dependency in the past when upgrading from Storybook 6 to 7.                                                                │
+│   However, since version 8.0, Storybook no longer requires you to provide "react" as a dependency.                                                                           │
+│   Some community addons might still wrongfully list "react" and "react-dom" as required peer dependencies, but since Storybook 7.6 it should not be needed in the majority   │
+│   of cases.                                                                                                                                                                  │
+│                                                                                                                                                                              │
+│   If you know you are not using React outside of Storybook, it should be safe to remove the "react" and "react-dom" dependencies from your project's package.json.           │
+│   Storybook cannot do this automatically as removing it might break your project, so it should be done manually with care.                                                   │
+│                                                                                                                                                                              │
+╰──────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
+? Select continue once you have made the required changes, or quit to exit the migration process › quit / continue? Select continue once you have made the required changes, or quit to exit the migration process › quit / continue✔ Select continue once you have made the required changes, or quit to exit the migration process … quit / continue
+
+╭ Migration check ran with failures ────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╮
+│                                                                                                                                                               │
+│   Failed migrations:                                                                                                                                          │
+│                                                                                                                                                               │
+│   mdx-to-csf:                                                                                                                                                 │
+│   ❌ Unable to determine Storybook stories globs in {                                                                                                         │
+│     "addons": [                                                                                                                                               │
+│       "@storybook/addon-webpack5-compiler-babel"                                                                                                              │
+│     ],                                                                                                                                                        │
+│     "docs": {                                                                                                                                                 │
+│       "autodocs": true                                                                                                                                        │
+│     }                                                                                                                                                         │
+│   }, skipping mdx-to-csf fix.                                                                                                                                 │
+│                                                                                                                                                               │
+│   In Storybook 7, we have deprecated defining stories in MDX files, and consequently have changed the suffix to simply .mdx.                                  │
+│                                                                                                                                                               │
+│   Now, since Storybook 8.0, we have removed support for .stories.mdx files.                                                                                   │
+│                                                                                                                                                               │
+│   We were unable to automatically migrate your 'stories' config to include any .mdx file instead of just .stories.mdx.                                        │
+│   We suggest you make this change manually.                                                                                                                   │
+│   To learn more about this change, see: https://github.com/storybookjs/storybook/blob/next/MIGRATION.md#mdx-docs-files                                        │
+│                                                                                                                                                               │
+│   You can find the full logs in /Users/raphaeljorge/Development/xp/packages/migration-storybook.log                                                           │
+│                                                                                                                                                               │
+│   Manual migrations:                                                                                                                                          │
+│                                                                                                                                                               │
+│   remove-react-dependency                                                                                                                                     │
+│                                                                                                                                                               │
+│   ─────────────────────────────────────────────────                                                                                                           │
+│                                                                                                                                                               │
+│   If you'd like to run the migrations again, you can do so by running 'npx storybook automigrate'                                                             │
+│                                                                                                                                                               │
+│   The automigrations try to migrate common patterns in your project, but might not contain everything needed to migrate to the latest version of Storybook.   │
+│                                                                                                                                                               │
+│   Please check the changelog and migration guide for manual migrations and more information: https://storybook.js.org/docs/migration-guide                    │
+│   And reach out on Discord if you need help: https://discord.gg/storybook                                                                                     │
+│                                                                                                                                                               │
+╰───────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────────╯
+
