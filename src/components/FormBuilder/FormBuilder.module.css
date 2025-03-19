@@ -1,0 +1,342 @@
+/* FormBuilder Module Styles */
+
+/* Form Container */
+.formBuilder {
+  width: 100%;
+  max-width: 100%;
+  font-family: sans-serif;
+}
+
+/* Row Styles */
+.formRow {
+  /* Basic styles only, Tailwind classes will be applied directly in JSX */
+}
+
+/* Column Styles */
+.formColumn {
+  /* Basic styles only, Tailwind classes will be applied directly in JSX */
+}
+
+/* Field Styles */
+.formField {
+  margin-bottom: 1rem;
+}
+
+.formLabel {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #333;
+}
+
+.formLabelContainer {
+  margin-bottom: 0.5rem;
+}
+
+.requiredMark {
+  color: #e53e3e;
+  margin-left: 0.25rem;
+}
+
+.formHint {
+  font-size: 0.875rem;
+  color: #666;
+  margin-left: 0.5rem;
+  font-weight: normal;
+}
+
+.formInput,
+.formSelect {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #d1d5db;
+  border-radius: 0.25rem;
+  font-size: 1rem;
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.formInput:focus,
+.formSelect:focus {
+  outline: none;
+  border-color: #3b82f6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.25);
+}
+
+.formInputError,
+.formSelectError {
+  border-color: #e53e3e;
+}
+
+.formInputError:focus,
+.formSelectError:focus {
+  border-color: #e53e3e;
+  box-shadow: 0 0 0 3px rgba(229, 62, 62, 0.25);
+}
+
+.formError {
+  color: #e53e3e;
+  font-size: 0.875rem;
+  margin-top: 0.25rem;
+}
+
+/* Chip Field Styles */
+.chipContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.chip {
+  display: inline-flex;
+  align-items: center;
+  padding: 0.5rem 1rem;
+  background-color: #f3f4f6;
+  border: 1px solid #d1d5db;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.chip:hover {
+  background-color: #e5e7eb;
+}
+
+.chipSelected {
+  background-color: #3b82f6;
+  color: white;
+  border-color: #3b82f6;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+/* Chip autocomplete styles */
+.chipAutocomplete {
+  position: relative;
+  width: 100%;
+}
+
+.chipDropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  width: 100%;
+  max-height: 200px;
+  overflow-y: auto;
+  background-color: white;
+  border: 1px solid #d1d5db;
+  border-radius: 0.375rem;
+  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  z-index: 10;
+  margin-top: 0.25rem;
+}
+
+.chipOption {
+  padding: 0.5rem 1rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  text-align: left;
+  width: 100%;
+  border: none;
+  background: none;
+}
+
+.chipOption:hover {
+  background-color: #f3f4f6;
+}
+
+.chipLabel {
+  margin-right: 0.25rem;
+}
+
+.chipRemove {
+  background: none;
+  border: none;
+  color: inherit;
+  font-size: 1.25rem;
+  line-height: 1;
+  padding: 0;
+  cursor: pointer;
+  opacity: 0.7;
+  transition: opacity 0.2s ease;
+}
+
+.chipRemove:hover {
+  opacity: 1;
+}
+
+.chipSelected:hover {
+  background-color: #2563eb;
+}
+
+.chipDisabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}
+
+/* Skeleton Loading Styles */
+.formSkeleton {
+  width: 100%;
+  padding: 0.5rem 0;
+}
+
+.skeletonInput {
+  width: 100%;
+  height: 38px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 0.25rem;
+  animation: skeletonLoading 1.5s infinite;
+}
+
+/* Skeleton styles for chip field */
+.skeletonChips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-top: 0.5rem;
+}
+
+.skeletonChip {
+  width: 100px;
+  height: 32px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 9999px;
+  animation: skeletonLoading 1.5s infinite;
+}
+
+/* Skeleton styles for array field */
+.skeletonArrayItems {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+  margin-top: 1rem;
+}
+
+.skeletonArrayItem {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+}
+
+.skeletonButton {
+  width: 80px;
+  height: 38px;
+  background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+  background-size: 200% 100%;
+  border-radius: 0.25rem;
+  animation: skeletonLoading 1.5s infinite;
+  flex-shrink: 0;
+}
+
+@keyframes skeletonLoading {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.loading .formLabel {
+  opacity: 0.7;
+}
+
+/* Array Field Styles */
+.arrayField {
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+  padding: 1rem;
+  background-color: #f9fafb;
+}
+
+.arrayFieldHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.arrayAddButton {
+  padding: 0.375rem 0.75rem;
+  background-color: #3b82f6;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.arrayAddButton:hover {
+  background-color: #2563eb;
+}
+
+.arrayAddButton:disabled {
+  background-color: #93c5fd;
+  cursor: not-allowed;
+}
+
+.arrayEmptyMessage {
+  text-align: center;
+  padding: 1rem;
+  color: #6b7280;
+  font-style: italic;
+}
+
+.arrayItems {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.arrayItem {
+  display: flex;
+  gap: 1rem;
+  align-items: flex-start;
+  padding: 1rem;
+  background-color: white;
+  border: 1px solid #e5e7eb;
+  border-radius: 0.375rem;
+}
+
+.arrayItemContent {
+  flex: 1;
+}
+
+.arrayRemoveButton {
+  padding: 0.375rem 0.75rem;
+  background-color: #ef4444;
+  color: white;
+  border: none;
+  border-radius: 0.25rem;
+  font-size: 0.875rem;
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+  margin-top: 1.5rem;
+}
+
+.arrayRemoveButton:hover {
+  background-color: #dc2626;
+}
+
+.arrayRemoveButton:disabled {
+  background-color: #fca5a5;
+  cursor: not-allowed;
+}
+
+/* Loading State */
+.loading .formInput,
+.loading .formSelect,
+.loading .chip {
+  background-color: #f3f4f6;
+  color: #9ca3af;
+  cursor: not-allowed;
+}
