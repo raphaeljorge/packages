@@ -1,10 +1,10 @@
-import type React from "react";
-import { useRef, useEffect } from "react";
-import type { SelectFieldProps } from "../types";
-import type { FieldOption } from "../../../../types/form";
-import styles from "./SelectField.module.css";
-import { classNames } from "../../../../utils/classNames";
-import { FormFieldContainer } from "../../common";
+import type React from 'react';
+import { useEffect, useRef } from 'react';
+import type { FieldOption } from '../../../../types/form';
+import { classNames } from '../../../../utils/classNames';
+import { FormFieldContainer } from '../../common';
+import type { SelectFieldProps } from '../types';
+import styles from './SelectField.module.css';
 
 /**
  * Select field component using uncontrolled input with ref
@@ -18,11 +18,11 @@ const SelectField: React.FC<SelectFieldProps> = ({
 }) => {
   // Use ref for uncontrolled select
   const selectRef = useRef<HTMLSelectElement>(null);
-  
+
   // Update select value when value prop changes
   useEffect(() => {
     if (selectRef.current && selectRef.current.value !== value) {
-      selectRef.current.value = value || "";
+      selectRef.current.value = value || '';
     }
   }, [value]);
 
@@ -32,7 +32,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   // Normalize options to { value, label } format
   const normalizedOptions = field.options.map((option) => {
-    if (typeof option === "string") {
+    if (typeof option === 'string') {
       return { value: option, label: option };
     }
     return option;
@@ -40,14 +40,13 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   // Skeleton loading state for the field
   const loadingContent = (
-    <div className={classNames(
-      styles.formSkeleton,
-      "w-full py-2"
-    )}>
-      <div className={classNames(
-        styles.skeletonInput,
-        "w-full h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse"
-      )} />
+    <div className={classNames(styles.formSkeleton, 'w-full py-2')}>
+      <div
+        className={classNames(
+          styles.skeletonInput,
+          'w-full h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse'
+        )}
+      />
     </div>
   );
 
@@ -59,24 +58,24 @@ const SelectField: React.FC<SelectFieldProps> = ({
       className={classNames(
         styles.formSelect,
         error && styles.formSelectError,
-        "w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500",
-        error && "border-red-500 focus:ring-red-500 focus:border-red-500"
+        'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
+        error && 'border-red-500 focus:ring-red-500 focus:border-red-500'
       )}
-      defaultValue={value || ""}
+      defaultValue={value || ''}
       onChange={handleChange}
       disabled={isLoading}
     >
-      <option value="">{field.placeholder || "Select an option"}</option>
-      
+      <option value="">{field.placeholder || 'Select an option'}</option>
+
       {normalizedOptions.map((option: FieldOption) => {
-        if (typeof option === "string") {
+        if (typeof option === 'string') {
           return (
             <option key={option} value={option}>
               {option}
             </option>
           );
         }
-        
+
         return (
           <option key={option.value} value={option.value}>
             {option.label}

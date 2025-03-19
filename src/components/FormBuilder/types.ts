@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
 /**
  * Common validation rules for form fields
@@ -11,7 +11,7 @@ export interface ValidationRule {
   max?: { value: number; message: string };
   minLength?: { value: number; message: string };
   maxLength?: { value: number; message: string };
-  validate?: "email" | "number" | string;
+  validate?: 'email' | 'number' | string;
   custom?: {
     validator: (value: any, formValues?: Record<string, any>) => boolean | string;
   };
@@ -35,7 +35,7 @@ export interface FieldOption {
  */
 export interface BaseFieldConfig {
   id: string;
-  type: "text" | "select" | "array" | "chip";
+  type: 'text' | 'select' | 'array' | 'chip';
   label?: string;
   placeholder?: string;
   required?: boolean;
@@ -49,14 +49,14 @@ export interface BaseFieldConfig {
  * Text field configuration
  */
 export interface TextFieldConfig extends BaseFieldConfig {
-  type: "text";
+  type: 'text';
 }
 
 /**
  * Select field configuration
  */
 export interface SelectFieldConfig extends BaseFieldConfig {
-  type: "select";
+  type: 'select';
   options: (string | FieldOption)[];
 }
 
@@ -64,7 +64,7 @@ export interface SelectFieldConfig extends BaseFieldConfig {
  * Chip field configuration
  */
 export interface ChipFieldConfig extends BaseFieldConfig {
-  type: "chip";
+  type: 'chip';
   options: (string | FieldOption)[];
   minItems?: number;
   maxItems?: number;
@@ -74,8 +74,8 @@ export interface ChipFieldConfig extends BaseFieldConfig {
  * Array field configuration
  */
 export interface ArrayFieldConfig extends BaseFieldConfig {
-  type: "array";
-  template: Omit<BaseFieldConfig, "id">;
+  type: 'array';
+  template: Omit<BaseFieldConfig, 'id'>;
   minItems?: number;
   maxItems?: number;
 }
@@ -83,11 +83,7 @@ export interface ArrayFieldConfig extends BaseFieldConfig {
 /**
  * Union type for all field configurations
  */
-export type FieldConfig = 
-  | TextFieldConfig 
-  | SelectFieldConfig 
-  | ChipFieldConfig 
-  | ArrayFieldConfig;
+export type FieldConfig = TextFieldConfig | SelectFieldConfig | ChipFieldConfig | ArrayFieldConfig;
 
 /**
  * Column configuration
@@ -120,7 +116,7 @@ export interface FormConfig {
 export interface FormBuilderOptions {
   defaultValues?: Record<string, any>;
   onSubmit?: (data: Record<string, any>) => void | Promise<void>;
-  validationBehavior?: "onChange" | "onBlur" | "onSubmit";
+  validationBehavior?: 'onChange' | 'onBlur' | 'onSubmit';
   transform?: (values: Record<string, any>) => Record<string, any>;
 }
 
@@ -168,7 +164,9 @@ export interface FormBuilderReturn {
   getValue: (name: string) => any;
   reset: () => void;
   arrayFields: Record<string, ArrayFieldOperations>;
-  handleSubmit: (callback?: (data: Record<string, any>) => void | Promise<void>) => (e?: React.FormEvent) => void;
+  handleSubmit: (
+    callback?: (data: Record<string, any>) => void | Promise<void>
+  ) => (e?: React.FormEvent) => void;
   validate: () => Promise<boolean>;
   clearErrors: () => void;
   setError: (name: string, error: string) => void;

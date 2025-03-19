@@ -5,17 +5,15 @@
   "main": "dist/index.js",
   "module": "dist/index.esm.js",
   "types": "dist/index.d.ts",
-  "files": [
-    "dist",
-    "README.md"
-  ],
+  "files": ["dist", "README.md"],
   "sideEffects": false,
   "scripts": {
     "build": "webpack --mode production",
     "dev": "webpack serve --mode development",
     "test": "vitest",
-    "format": "biome format ./src",
-    "lint": "biome lint ./src",
+    "lint": "npx @biomejs/biome check --max-diagnostics=100 .",
+    "lint:fix": "npx @biomejs/biome check --write --unsafe --max-diagnostics=100 .",
+    "format": "npx @biomejs/biome format --write --max-diagnostics=100 .",
     "check": "biome check ./src",
     "storybook": "storybook dev -p 6006",
     "build-storybook": "storybook build",
@@ -28,14 +26,17 @@
   "dependencies": {
     "@tanstack/react-form": "^0.13.3",
     "@tanstack/react-query": "^5.17.19",
-    "react-hook-form": "^7.54.2"
+    "@tanstack/zod-form-adapter": "^0.42.1",
+    "mini-css-extract-plugin": "^2.9.2",
+    "react-hook-form": "^7.54.2",
+    "zod": "^3.24.2"
   },
   "devDependencies": {
     "@babel/core": "^7.24.0",
     "@babel/preset-env": "^7.24.0",
     "@babel/preset-react": "^7.24.0",
     "@babel/preset-typescript": "^7.24.0",
-    "@biomejs/biome": "1.5.3",
+    "@biomejs/biome": "1.9.4",
     "@storybook/addon-essentials": "^7.6.10",
     "@storybook/addon-interactions": "^7.6.10",
     "@storybook/addon-links": "^7.6.10",
@@ -65,12 +66,7 @@
     "webpack-cli": "^5.1.4",
     "webpack-dev-server": "^4.15.1"
   },
-  "keywords": [
-    "react",
-    "components",
-    "ui",
-    "library"
-  ],
+  "keywords": ["react", "components", "ui", "library"],
   "author": "",
   "license": "MIT",
   "repository": {

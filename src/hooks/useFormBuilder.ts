@@ -1,16 +1,16 @@
-import { useForm } from "react-hook-form";
-import { useState, useEffect, useMemo } from "react";
-import type { FormEvent } from "react";
+import { useEffect, useMemo, useState } from 'react';
+import type { FormEvent } from 'react';
+import { useForm } from 'react-hook-form';
+import { applyMask } from '../components/FormBuilder/fields/TextField/TextField';
 import type {
+  ArrayColumnConfig,
+  ColumnConfig,
   FormBuilderOptions,
   FormBuilderReturn,
   FormConfig,
-  ArrayColumnConfig,
-  ColumnConfig,
-  ValidationRule,
   TextColumnConfig,
-} from "../types/form";
-import { applyMask } from "../components/FormBuilder/fields/TextField/TextField";
+  ValidationRule,
+} from '../types/form';
 
 /**
  * Extract all field configurations from the form config
@@ -35,7 +35,7 @@ const findArrayFieldsInConfig = (config: FormConfig): ArrayColumnConfig[] => {
 
   for (const row of config.rows) {
     for (const column of row.columns) {
-      if (column.type === "array") {
+      if (column.type === 'array') {
         arrayFields.push(column as ArrayColumnConfig);
       }
     }
@@ -47,9 +47,7 @@ const findArrayFieldsInConfig = (config: FormConfig): ArrayColumnConfig[] => {
 /**
  * Create validation rules for react-hook-form
  */
-const createValidationRules = (
-  fields: Record<string, ColumnConfig>
-): Record<string, any> => {
+const createValidationRules = (fields: Record<string, ColumnConfig>): Record<string, any> => {
   const rules: Record<string, any> = {};
 
   for (const [fieldId, fieldConfig] of Object.entries(fields)) {
@@ -59,7 +57,7 @@ const createValidationRules = (
     if (fieldConfig.required) {
       rule.required = {
         value: true,
-        message: "This field is required",
+        message: 'This field is required',
       };
     }
 
@@ -67,12 +65,12 @@ const createValidationRules = (
     if (fieldConfig.validation?.pattern) {
       rule.pattern = {
         value: new RegExp(fieldConfig.validation.pattern),
-        message: fieldConfig.validation.message || "Invalid format",
+        message: fieldConfig.validation.message || 'Invalid format',
       };
     }
 
     // Min/max items validation for chip fields
-    if (fieldConfig.type === "chip") {
+    if (fieldConfig.type === 'chip') {
       if (fieldConfig.minItems) {
         rule.validate = {
           ...rule.validate,
@@ -118,7 +116,7 @@ const createValidationRules = (
       validate: {
         ...rules.confirmPassword?.validate,
         passwordMatch: (value: string, formValues: Record<string, any>) => {
-          return value === formValues.password || "Passwords do not match";
+          return value === formValues.password || 'Passwords do not match';
         },
       },
     };
@@ -143,20 +141,20 @@ const initializeDefaultValues = (
       } else {
         // Set appropriate default values based on field type
         switch (fieldConfig.type) {
-          case "text":
-            defaultValues[fieldId] = "";
+          case 'text':
+            defaultValues[fieldId] = '';
             break;
-          case "select":
-            defaultValues[fieldId] = "";
+          case 'select':
+            defaultValues[fieldId] = '';
             break;
-          case "chip":
+          case 'chip':
             defaultValues[fieldId] = [];
             break;
-          case "array":
+          case 'array':
             defaultValues[fieldId] = [];
             break;
           default:
-            defaultValues[fieldId] = "";
+            defaultValues[fieldId] = '';
         }
       }
     }
@@ -174,10 +172,10 @@ export const useFormBuilder = (
 ): FormBuilderReturn => {
   // Extract fields from config
   const fields = useMemo(() => extractFieldsFromConfig(config), [config]);
-  
+
   // Create validation rules
   const validationRules = useMemo(() => createValidationRules(fields), [fields]);
-  
+
   // Initialize default values
   const defaultValues = useMemo(
     () => initializeDefaultValues(fields, options.defaultValues),
@@ -195,7 +193,7 @@ export const useFormBuilder = (
     register,
   } = useForm({
     defaultValues,
-    mode: options.mode || "onSubmit",
+    mode: options.mode || 'onSubmit',
   });
 
   // Register all fields with validation rules
@@ -259,7 +257,7 @@ export const useFormBuilder = (
       if (e) {
         e.preventDefault();
       }
-      
+
       return rhfHandleSubmit(async (data) => {
         if (callback) {
           await callback(data);
@@ -287,19 +285,19 @@ export const useFormBuilder = (
   const getMaskedValues = () => {
     const values = getValues();
     const maskedValues: Record<string, any> = { ...values };
-    
+
     // Apply masks to fields that have them
     for (const [fieldId, fieldConfig] of Object.entries(fields)) {
-      if (fieldConfig.type === "text" && (fieldConfig as TextColumnConfig).mask) {
+      if (fieldConfig.type === 'text' && (fieldConfig as TextColumnConfig).mask) {
         const mask = (fieldConfig as TextColumnConfig).mask;
         const rawValue = values[fieldId];
-        
+
         if (mask && rawValue) {
           maskedValues[fieldId] = applyMask(rawValue, mask);
         }
       }
     }
-    
+
     return maskedValues;
   };
 
@@ -317,16 +315,20 @@ export const useFormBuilder = (
       isSubmitting: formState.isSubmitting,
       isSubmitSuccessful: formState.isSubmitSuccessful,
       // Convert errors to expected format
-      errors: Object.entries(formState.errors).reduce((acc, [key, error]) => {
-        if (error) {
-          acc[key] = {
-            message: typeof error === 'object' && error !== null && 'message' in error
-              ? String(error.message)
-              : String(error)
-          };
-        }
-        return acc;
-      }, {} as Record<string, { message: string }>),
+      errors: Object.entries(formState.errors).reduce(
+        (acc, [key, error]) => {
+          if (error) {
+            acc[key] = {
+              message:
+                typeof error === 'object' && error !== null && 'message' in error
+                  ? String(error.message)
+                  : String(error),
+            };
+          }
+          return acc;
+        },
+        {} as Record<string, { message: string }>
+      ),
       dirtyFields: formState.dirtyFields as Record<string, boolean>,
       touchedFields: formState.touchedFields as Record<string, boolean>,
     },
@@ -335,9 +337,9 @@ export const useFormBuilder = (
       setValue(name, value, {
         shouldDirty: true,
         shouldTouch: true,
-        shouldValidate: true
+        shouldValidate: true,
       });
-      
+
       // Update the masked values when a field value changes
       // This is handled automatically by getMaskedValues() when state.masked is accessed
     },

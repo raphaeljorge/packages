@@ -1,4 +1,4 @@
-import type { ReactNode } from "react";
+import type { ReactNode } from 'react';
 
 /**
  * Form field option for select and chip fields
@@ -21,7 +21,7 @@ export interface ValidationRule {
  */
 export interface BaseColumnConfig {
   id: string;
-  type: "text" | "select" | "chip" | "array";
+  type: 'text' | 'select' | 'chip' | 'array';
   wrapperProps?: Record<string, any>;
   wrapper?: React.ComponentType<WrapperProps>; // Direct reference to a wrapper component
   label?: string;
@@ -35,7 +35,7 @@ export interface BaseColumnConfig {
  * Text field column configuration
  */
 export interface TextColumnConfig extends BaseColumnConfig {
-  type: "text";
+  type: 'text';
   mask?: string;
 }
 
@@ -43,7 +43,7 @@ export interface TextColumnConfig extends BaseColumnConfig {
  * Select field column configuration
  */
 export interface SelectColumnConfig extends BaseColumnConfig {
-  type: "select";
+  type: 'select';
   options: FieldOption[];
 }
 
@@ -51,7 +51,7 @@ export interface SelectColumnConfig extends BaseColumnConfig {
  * Chip field column configuration
  */
 export interface ChipColumnConfig extends BaseColumnConfig {
-  type: "chip";
+  type: 'chip';
   options: FieldOption[];
   minItems?: number;
   maxItems?: number;
@@ -61,8 +61,8 @@ export interface ChipColumnConfig extends BaseColumnConfig {
  * Array field column configuration
  */
 export interface ArrayColumnConfig extends BaseColumnConfig {
-  type: "array";
-  template: Omit<BaseColumnConfig, "id">;
+  type: 'array';
+  template: Omit<BaseColumnConfig, 'id'>;
   minItems?: number;
   maxItems?: number;
 }
@@ -70,10 +70,10 @@ export interface ArrayColumnConfig extends BaseColumnConfig {
 /**
  * Union type for all column configurations
  */
-export type ColumnConfig = 
-  | TextColumnConfig 
-  | SelectColumnConfig 
-  | ChipColumnConfig 
+export type ColumnConfig =
+  | TextColumnConfig
+  | SelectColumnConfig
+  | ChipColumnConfig
   | ArrayColumnConfig;
 
 /**
@@ -114,7 +114,7 @@ export interface FormState {
 export interface FormBuilderOptions {
   defaultValues?: Record<string, any>;
   onSubmit?: (data: Record<string, any>) => void | Promise<void>;
-  mode?: "onChange" | "onBlur" | "onSubmit";
+  mode?: 'onChange' | 'onBlur' | 'onSubmit';
 }
 
 /**
@@ -130,7 +130,9 @@ export interface FormBuilderReturn {
   getValue: (name: string) => any;
   resetForm: () => void;
   validateField: (name: string, value?: any) => Promise<boolean>;
-  handleSubmit: (callback?: (data: Record<string, any>) => void | Promise<void>) => (e?: React.FormEvent) => void;
+  handleSubmit: (
+    callback?: (data: Record<string, any>) => void | Promise<void>
+  ) => (e?: React.FormEvent) => void;
   arrayFields: {
     [key: string]: {
       add: (value: any) => void;

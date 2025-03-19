@@ -1,6 +1,6 @@
-import type React from "react";
-import { FormLabel, FormError } from "./";
-import { classNames } from "../../../utils/classNames";
+import type React from 'react';
+import { classNames } from '../../../utils/classNames';
+import { FormError, FormLabel } from './';
 
 export interface FormFieldContainerProps {
   id: string;
@@ -30,20 +30,11 @@ const FormFieldContainer: React.FC<FormFieldContainerProps> = ({
   className,
 }) => {
   return (
-    <div className={classNames(
-      "mb-4",
-      isLoading && "opacity-70",
-      className
-    )}>
-      <FormLabel 
-        id={id} 
-        label={label} 
-        required={required} 
-        hint={hint}
-      />
-      
+    <div className={classNames('mb-4', isLoading && 'opacity-70', className)}>
+      <FormLabel id={id} label={label} required={required} hint={hint} />
+
       {isLoading && loadingContent ? loadingContent : children}
-      
+
       <FormError error={error} />
     </div>
   );

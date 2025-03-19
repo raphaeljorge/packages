@@ -1,9 +1,9 @@
 import type {
-  TextColumnConfig,
-  SelectColumnConfig,
-  ChipColumnConfig,
   ArrayColumnConfig,
-} from "../../../types/form";
+  ChipColumnConfig,
+  SelectColumnConfig,
+  TextColumnConfig,
+} from '../../../types/form';
 
 /**
  * Base field props

@@ -1,6 +1,6 @@
-import type React from "react";
-import styles from "./FormError.module.css";
-import { classNames } from "../../../utils/classNames";
+import type React from 'react';
+import { classNames } from '../../../utils/classNames';
+import styles from './FormError.module.css';
 
 interface FormErrorProps {
   error?: string;
@@ -12,14 +12,7 @@ interface FormErrorProps {
 const FormError: React.FC<FormErrorProps> = ({ error }) => {
   if (!error) return null;
 
-  return (
-    <div className={classNames(
-      styles.formError,
-      "mt-1 text-sm text-red-500"
-    )}>
-      {error}
-    </div>
-  );
+  return <div className={classNames(styles.formError, 'mt-1 text-sm text-red-500')}>{error}</div>;
 };
 
 export default FormError;
