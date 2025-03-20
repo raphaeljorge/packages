@@ -9,12 +9,18 @@
 
 /* Row Styles */
 .formRow {
-  /* Basic styles only, Tailwind classes will be applied directly in JSX */
+  display: flex;
+  flex-wrap: wrap;
+  margin-bottom: 1.5rem;
+  gap: 1rem;
+  width: 100%;
 }
 
 /* Column Styles */
 .formColumn {
-  /* Basic styles only, Tailwind classes will be applied directly in JSX */
+  flex: 1;
+  min-width: 250px;
+  width: 100%;
 }
 
 /* Field Styles */

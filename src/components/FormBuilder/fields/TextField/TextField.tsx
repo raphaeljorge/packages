@@ -123,13 +123,8 @@ const TextField: React.FC<TextFieldProps> = ({
 
   // Skeleton loading state for the field
   const loadingContent = (
-    <div className={classNames(styles.formSkeleton, 'w-full py-2')}>
-      <div
-        className={classNames(
-          styles.skeletonInput,
-          'w-full h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse'
-        )}
-      />
+    <div className={styles.formSkeleton}>
+      <div className={styles.skeletonInput} />
     </div>
   );
 
@@ -141,9 +136,7 @@ const TextField: React.FC<TextFieldProps> = ({
       type="text"
       className={classNames(
         styles.formInput,
-        error && styles.formInputError,
-        'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-        error && 'border-red-500 focus:ring-red-500 focus:border-red-500'
+        error && styles.formInputError
       )}
       value={displayValue}
       onChange={handleChange}

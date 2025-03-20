@@ -31,7 +31,12 @@ const SelectField: React.FC<SelectFieldProps> = ({
   };
 
   // Normalize options to { value, label } format
-  const normalizedOptions = field.options.map((option) => {
+  interface NormalizedOption {
+    value: string;
+    label: string;
+  }
+
+  const normalizedOptions: NormalizedOption[] = field.options.map((option: FieldOption): NormalizedOption => {
     if (typeof option === 'string') {
       return { value: option, label: option };
     }
@@ -40,13 +45,8 @@ const SelectField: React.FC<SelectFieldProps> = ({
 
   // Skeleton loading state for the field
   const loadingContent = (
-    <div className={classNames(styles.formSkeleton, 'w-full py-2')}>
-      <div
-        className={classNames(
-          styles.skeletonInput,
-          'w-full h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse'
-        )}
-      />
+    <div className={styles.formSkeleton}>
+      <div className={styles.skeletonInput} />
     </div>
   );
 
@@ -57,9 +57,7 @@ const SelectField: React.FC<SelectFieldProps> = ({
       id={field.id}
       className={classNames(
         styles.formSelect,
-        error && styles.formSelectError,
-        'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500',
-        error && 'border-red-500 focus:ring-red-500 focus:border-red-500'
+        error && styles.formSelectError
       )}
       defaultValue={value || ''}
       onChange={handleChange}

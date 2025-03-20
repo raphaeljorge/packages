@@ -1,6 +1,5 @@
 import type React from 'react';
 import { useEffect, useMemo, useRef, useState } from 'react';
-import type { FieldOption as FormFieldOption } from '../../../../types/form';
 import { classNames } from '../../../../utils/classNames';
 import { FormFieldContainer } from '../../common';
 import type { ChipFieldProps } from '../types';
@@ -40,9 +39,9 @@ const ChipField: React.FC<ChipFieldProps> = ({
 
   // Normalize options to { value, label } format
   const normalizedOptions = useMemo(() => {
-    return field.options.map((option) => {
+    return field.options.map((option: string | NormalizedOption): NormalizedOption => {
       if (typeof option === 'string') {
-        return { value: option, label: option };
+      return { value: option, label: option };
       }
       return option as NormalizedOption;
     });
@@ -141,26 +140,11 @@ const ChipField: React.FC<ChipFieldProps> = ({
 
   // Skeleton loading state for the field
   const loadingContent = (
-    <div className={classNames(styles.formSkeleton, 'w-full py-2')}>
-      <div
-        className={classNames(
-          styles.skeletonInput,
-          'w-full h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse'
-        )}
-      />
-      <div className={classNames(styles.skeletonChips, 'flex flex-wrap gap-2 mt-2')}>
-        <div
-          className={classNames(
-            styles.skeletonChip,
-            'w-[100px] h-[32px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded-full animate-pulse'
-          )}
-        />
-        <div
-          className={classNames(
-            styles.skeletonChip,
-            'w-[100px] h-[32px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded-full animate-pulse'
-          )}
-        />
+    <div className={styles.formSkeleton}>
+      <div className={styles.skeletonInput} />
+      <div className={styles.skeletonChips}>
+        <div className={styles.skeletonChip} />
+        <div className={styles.skeletonChip} />
       </div>
     </div>
   );
@@ -169,14 +153,11 @@ const ChipField: React.FC<ChipFieldProps> = ({
   const fieldContent = (
     <>
       {/* Autocomplete input */}
-      <div className={classNames(styles.chipAutocomplete, 'relative w-full')}>
+      <div className={styles.chipAutocomplete}>
         <input
           ref={inputRef}
           type="text"
-          className={classNames(
-            styles.formInput,
-            'w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-2 focus:ring-blue-500 focus:border-blue-500'
-          )}
+          className={styles.formInput}
           placeholder={field.placeholder || 'Type to search...'}
           value={inputValue}
           onChange={handleInputChange}
@@ -187,20 +168,13 @@ const ChipField: React.FC<ChipFieldProps> = ({
 
         {/* Dropdown for autocomplete options */}
         {showDropdown && filteredOptions.length > 0 && (
-          <div
-            className={classNames(
-              styles.chipDropdown,
-              'absolute top-full left-0 w-full max-h-[200px] overflow-y-auto bg-white border border-gray-300 rounded-md shadow-lg z-10 mt-1'
-            )}
+          <div className={styles.chipDropdown}
           >
             {filteredOptions.map((option) => (
               <button
                 key={option.value}
                 type="button"
-                className={classNames(
-                  styles.chipOption,
-                  'p-2 cursor-pointer transition-colors duration-200 text-left w-full border-none bg-transparent hover:bg-gray-100'
-                )}
+                className={styles.chipOption}
                 onClick={() => handleOptionSelect(option)}
                 onKeyPress={(e) => {
                   if (e.key === 'Enter' || e.key === ' ') {
@@ -217,7 +191,7 @@ const ChipField: React.FC<ChipFieldProps> = ({
 
       {/* Selected chips */}
       {!isLoading && (
-        <div className={classNames(styles.chipContainer, 'flex flex-wrap gap-2 mt-2')}>
+        <div className={styles.chipContainer}>
           {selectedChips.map((chipValue) => {
             // Find the option for this chip
             const option = normalizedOptions.find(
@@ -230,17 +204,13 @@ const ChipField: React.FC<ChipFieldProps> = ({
                 key={chipValue}
                 className={classNames(
                   styles.chip,
-                  styles.chipSelected,
-                  'inline-flex items-center px-4 py-2 bg-blue-500 text-white border border-blue-500 rounded-full text-sm gap-2'
+                  styles.chipSelected
                 )}
               >
-                <span className={classNames(styles.chipLabel, 'mr-1')}>{chipLabel}</span>
+                <span className={styles.chipLabel}>{chipLabel}</span>
                 <button
                   type="button"
-                  className={classNames(
-                    styles.chipRemove,
-                    'bg-transparent border-none text-inherit text-xl leading-none p-0 cursor-pointer opacity-70 hover:opacity-100'
-                  )}
+                  className={styles.chipRemove}
                   onClick={() => removeChip(chipValue)}
                   aria-label={`Remove ${chipLabel}`}
                 >

@@ -12,6 +12,8 @@ module.exports = {
     },
     globalObject: 'this',
     clean: true,
+    // Add publicPath to ensure assets are referenced correctly
+    publicPath: '',
   },
   externals: {
     react: {
@@ -36,6 +38,17 @@ module.exports = {
     new MiniCssExtractPlugin({
       filename: 'styles.css',
     }),
+    // Add a plugin to expose the public path
+    {
+      apply: (compiler) => {
+        compiler.hooks.afterEmit.tap('ExposePublicPathPlugin', () => {
+          // This will be available in the browser
+          if (typeof window !== 'undefined') {
+            window.__MY_REACT_LIBRARY_PUBLIC_PATH__ = compiler.options.output.publicPath;
+          }
+        });
+      },
+    },
   ],
   module: {
     rules: [

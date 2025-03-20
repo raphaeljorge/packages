@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>My React Library Example</title>
+  <!-- Styles are automatically injected when the library is loaded -->
+  <!-- Manual inclusion is only needed as a fallback if auto-injection fails: -->
+  <!-- <link rel="stylesheet" href="../dist/styles.css"> -->
+</head>
+<body>
+  <div id="root"></div>
+  
+  <!-- In a real application, you would bundle your code with webpack, Parcel, etc. -->
+  <!-- This is just for demonstration purposes -->
+  <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+  <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+  <script src="../dist/index.js"></script>
+  <script>
+    // If you're not using a bundler, you would need to use the UMD build
+    // and access the library through the global variable
+    const { FormBuilder } = MyReactLibrary;
+    
+    // Note: In a real application, you would use a bundler like webpack
+    // and import the components and styles as shown in index.js
+  </script>
+</body>
+</html>

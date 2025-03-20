@@ -1,6 +1,7 @@
 import type React from 'react';
 import { classNames } from '../../../utils/classNames';
 import { FormError, FormLabel } from './';
+import styles from './FormFieldContainer.module.css';
 
 export interface FormFieldContainerProps {
   id: string;
@@ -30,7 +31,7 @@ const FormFieldContainer: React.FC<FormFieldContainerProps> = ({
   className,
 }) => {
   return (
-    <div className={classNames('mb-4', isLoading && 'opacity-70', className)}>
+    <div className={classNames(styles.formFieldContainer, isLoading && styles.loading, className)}>
       <FormLabel id={id} label={label} required={required} hint={hint} />
 
       {isLoading && loadingContent ? loadingContent : children}

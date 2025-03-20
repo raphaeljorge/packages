@@ -3,7 +3,6 @@
 .formField {
   margin-bottom: 1rem;
 }
-
 .formInput {
   width: 100%;
   padding: 0.5rem 0.75rem;
@@ -15,6 +14,7 @@
   background-color: #fff;
   background-clip: padding-box;
   transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+  box-shadow: 0 1px 2px 0 rgba(0, 0, 0, 0.05);
 }
 
 .formInput:focus {
@@ -44,6 +44,13 @@
   background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
   background-size: 200% 100%;
   border-radius: 0.25rem;
+  animation: skeletonLoading 1.5s infinite;
+}
+
+.skeletonPulse {
+  background: linear-gradient(90deg, #f9fafb 0%, #e5e7eb 50%, #f9fafb 100%);
+  background-size: 200% 100%;
+  border-radius: 0.375rem;
   animation: skeletonLoading 1.5s infinite;
 }
 

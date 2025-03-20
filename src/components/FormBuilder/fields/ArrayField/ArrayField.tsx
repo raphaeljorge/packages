@@ -75,15 +75,12 @@ const ArrayField: React.FC<ArrayFieldProps> = ({
 
   // Custom header with label and add button
   const customHeader = (
-    <div className={classNames(styles.arrayFieldHeader, 'flex justify-between items-center mb-4')}>
+    <div className={styles.arrayFieldHeader}>
       <button
         type="button"
         className={classNames(
           styles.arrayAddButton,
-          'px-3 py-1 bg-blue-500 text-white rounded-md text-sm font-medium hover:bg-blue-600',
-          isLoading || (field.maxItems ? items.length >= field.maxItems : false)
-            ? 'bg-blue-300 cursor-not-allowed'
-            : ''
+          isLoading || (field.maxItems ? items.length >= field.maxItems : false) && styles.disabled
         )}
         onClick={addItem}
         disabled={isLoading || (field.maxItems ? items.length >= field.maxItems : false)}
@@ -96,46 +93,16 @@ const ArrayField: React.FC<ArrayFieldProps> = ({
 
   // Skeleton loading state for the field
   const loadingContent = (
-    <div className={classNames(styles.formSkeleton, 'w-full py-2')}>
-      <div className={classNames(styles.skeletonArrayItems, 'flex flex-col gap-4 mt-4')}>
-        <div
-          className={classNames(
-            styles.skeletonArrayItem,
-            'flex gap-4 items-center p-4 bg-white border border-gray-200 rounded-md'
-          )}
-        >
-          <div
-            className={classNames(
-              styles.skeletonInput,
-              'w-full h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse'
-            )}
-          />
-          <div
-            className={classNames(
-              styles.skeletonButton,
-              'w-[80px] h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse flex-shrink-0'
-            )}
-          />
+    <div className={styles.formSkeleton}>
+      <div className={styles.skeletonArrayItems}>
+        <div className={styles.skeletonArrayItem}>
+          <div className={styles.skeletonInput} />
+          <div className={styles.skeletonButton} />
         </div>
         {items.length > 1 && (
-          <div
-            className={classNames(
-              styles.skeletonArrayItem,
-              'flex gap-4 items-center p-4 bg-white border border-gray-200 rounded-md'
-            )}
-          >
-            <div
-              className={classNames(
-                styles.skeletonInput,
-                'w-full h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse'
-              )}
-            />
-            <div
-              className={classNames(
-                styles.skeletonButton,
-                'w-[80px] h-[38px] bg-gradient-to-r from-gray-100 via-gray-200 to-gray-100 bg-[length:200%_100%] rounded animate-pulse flex-shrink-0'
-              )}
-            />
+          <div className={styles.skeletonArrayItem}>
+            <div className={styles.skeletonInput} />
+            <div className={styles.skeletonButton} />
           </div>
         )}
       </div>
@@ -148,27 +115,19 @@ const ArrayField: React.FC<ArrayFieldProps> = ({
       {customHeader}
 
       {items.length === 0 && !isLoading && (
-        <div
-          className={classNames(
-            styles.arrayEmptyMessage,
-            'text-center p-4 text-gray-500 italic bg-white border border-dashed border-gray-300 rounded-md'
-          )}
-        >
+        <div className={styles.arrayEmptyMessage}>
           No items added yet. Click "Add" to add an item.
         </div>
       )}
 
       {items.length > 0 && !isLoading && (
-        <div className={classNames(styles.arrayItems, 'flex flex-col gap-4')}>
+        <div className={styles.arrayItems}>
           {items.map((item, index) => (
             <div
               key={`${field.id}-item-${index}`}
-              className={classNames(
-                styles.arrayItem,
-                'flex gap-4 items-start p-4 bg-white border border-gray-200 rounded-md'
-              )}
+              className={styles.arrayItem}
             >
-              <div className={classNames(styles.arrayItemContent, 'flex-1')}>
+              <div className={styles.arrayItemContent}>
                 {field.template.type === 'text' && (
                   <TextField
                     field={
@@ -191,10 +150,7 @@ const ArrayField: React.FC<ArrayFieldProps> = ({
                 type="button"
                 className={classNames(
                   styles.arrayRemoveButton,
-                  'px-3 py-1 bg-red-500 text-white rounded-md text-sm font-medium mt-6 hover:bg-red-600',
-                  isLoading || (field.minItems ? items.length <= field.minItems : false)
-                    ? 'bg-red-300 cursor-not-allowed'
-                    : ''
+                  isLoading || (field.minItems ? items.length <= field.minItems : false) && styles.disabled
                 )}
                 onClick={() => removeItem(index)}
                 disabled={isLoading || (field.minItems ? items.length <= field.minItems : false)}
@@ -221,8 +177,7 @@ const ArrayField: React.FC<ArrayFieldProps> = ({
       className={classNames(
         styles.formField,
         styles.arrayField,
-        isLoading && styles.loading,
-        'border border-gray-200 rounded-md p-4 bg-gray-50'
+        isLoading && styles.loading
       )}
     >
       {fieldContent}

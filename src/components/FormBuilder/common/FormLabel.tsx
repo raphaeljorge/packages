@@ -1,5 +1,4 @@
 import type React from 'react';
-import { classNames } from '../../../utils/classNames';
 import styles from './FormLabel.module.css';
 
 interface FormLabelProps {
@@ -18,16 +17,16 @@ const FormLabel: React.FC<FormLabelProps> = ({ id, label, required, hint }) => {
   return (
     <label
       htmlFor={id}
-      className={classNames(styles.formLabel, 'block text-sm font-medium text-gray-700 mb-1')}
+      className={styles.formLabel}
     >
       {label}
       {required && (
-        <span className={classNames(styles.requiredMark, 'text-red-500 ml-1 font-semibold')}>
+        <span className={styles.requiredMark}>
           *
         </span>
       )}
       {hint && (
-        <span className={classNames(styles.formHint, 'text-xs text-gray-500 ml-1')}>({hint})</span>
+        <span className={styles.formHint}>({hint})</span>
       )}
     </label>
   );
